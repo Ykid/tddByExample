@@ -10,6 +10,7 @@ public class Test {
         new Test().testFrancMultiplication();
         new Test().testEquality();
         new Test().testMoneyEquality();
+        new Test().testCurrency();
     }
     public void testMultiplication() {
         System.out.println("----------testMultiplication----------");
@@ -40,4 +41,9 @@ public class Test {
         AssertHelper.assertEquals(false, Money.dollar(5).equals(Money.franc(5)));
     }
 
+    public void testCurrency() {
+        System.out.println("----------testCurrency----------");
+        AssertHelper.assertEquals("USD", Money.dollar(5).currency());
+        AssertHelper.assertEquals("CHF", Money.franc(5).currency());
+    }
 }
