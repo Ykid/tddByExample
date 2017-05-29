@@ -11,6 +11,7 @@ public class Test {
         new Test().testEquality();
         new Test().testMoneyEquality();
         new Test().testCurrency();
+        new Test().testDifferentClassEquality();
     }
     public void testMultiplication() {
         System.out.println("----------testMultiplication----------");
@@ -45,5 +46,10 @@ public class Test {
         System.out.println("----------testCurrency----------");
         AssertHelper.assertEquals("USD", Money.dollar(5).currency());
         AssertHelper.assertEquals("CHF", Money.franc(5).currency());
+    }
+
+    public void testDifferentClassEquality() {
+        System.out.println("----------testDifferentClassEquality----------");
+        AssertHelper.assertEquals(true, new Money(10, "CHF").equals(new Franc(10, "CHF")));
     }
 }
