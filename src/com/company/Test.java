@@ -7,11 +7,9 @@ public class Test {
     public void runTest() {
         new Test().testMultiplication();
         new Test().testEquality();
-        new Test().testFrancMultiplication();
         new Test().testEquality();
         new Test().testMoneyEquality();
         new Test().testCurrency();
-        new Test().testDifferentClassEquality();
     }
     public void testMultiplication() {
         System.out.println("----------testMultiplication----------");
@@ -26,19 +24,10 @@ public class Test {
         AssertHelper.assertEquals(false, Money.dollar(6).equals(Money.dollar(5)));
     }
 
-    public void testFrancMultiplication() {
-        System.out.println("----------testFrancMultiplication----------");
-        Money five = Money.franc(5);
-        AssertHelper.assertEquals( Money.franc(10), five.times(2));
-        AssertHelper.assertEquals(Money.franc(15), five.times(3));
-    }
-
     public void testMoneyEquality() {
         System.out.println("----------testMoneyEquality----------");
         AssertHelper.assertEquals(true, Money.dollar(5).equals(Money.dollar(5)));
         AssertHelper.assertEquals(false, Money.dollar(6).equals(Money.dollar(5)));
-        AssertHelper.assertEquals(true, Money.franc(5).equals(Money.franc(5)));
-        AssertHelper.assertEquals(false, Money.franc(6).equals(Money.franc(5)));
         AssertHelper.assertEquals(false, Money.dollar(5).equals(Money.franc(5)));
     }
 
@@ -46,10 +35,5 @@ public class Test {
         System.out.println("----------testCurrency----------");
         AssertHelper.assertEquals("USD", Money.dollar(5).currency());
         AssertHelper.assertEquals("CHF", Money.franc(5).currency());
-    }
-
-    public void testDifferentClassEquality() {
-        System.out.println("----------testDifferentClassEquality----------");
-        AssertHelper.assertEquals(true, new Money(10, "CHF").equals(new Franc(10, "CHF")));
     }
 }
