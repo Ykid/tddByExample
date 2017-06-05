@@ -10,6 +10,7 @@ public class Test {
         new Test().testEquality();
         new Test().testMoneyEquality();
         new Test().testCurrency();
+        new Test().testSimpleAddition();
     }
     public void testMultiplication() {
         System.out.println("----------testMultiplication----------");
