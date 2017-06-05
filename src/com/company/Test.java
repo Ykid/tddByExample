@@ -11,6 +11,9 @@ public class Test {
         new Test().testMoneyEquality();
         new Test().testCurrency();
         new Test().testSimpleAddition();
+        new Test().testPlusReturnSum();
+        new Test().testReduceSum();
+        new Test().testReduceMoney();
     }
     public void testMultiplication() {
         System.out.println("----------testMultiplication----------");
@@ -45,5 +48,29 @@ public class Test {
         Bank bank = new Bank();
         Money reduced = bank.reduce(sum, "USD");
         AssertHelper.assertEquals(reduced, Money.dollar(10));
+    }
+
+    public void testPlusReturnSum() {
+        System.out.println("----------testPlusReturnSum----------");
+        Money five = Money.dollar(5);
+        Expression result = five.plus(five);
+        Sum sum = (Sum) result;
+        AssertHelper.assertEquals(five, sum.augend);
+        AssertHelper.assertEquals(five, sum.addend);
+    }
+
+    public void testReduceSum() {
+        System.out.println("----------testReduceSum----------");
+        Expression sum = new Sum(Money.dollar(3), Money.dollar(4));
+        Bank bank = new Bank();
+        Money result = bank.reduce(sum, "USD");//very readable !
+        AssertHelper.assertEquals(result, Money.dollar(7));
+    }
+
+    public void testReduceMoney() {
+        System.out.println("----------testReduceMoney----------");
+        Bank bank = new Bank();
+        Money result =  bank.reduce(Money.dollar(1), "USD");
+        AssertHelper.assertEquals(result, Money.dollar(1));
     }
 }
