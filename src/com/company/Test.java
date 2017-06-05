@@ -14,6 +14,8 @@ public class Test {
         new Test().testPlusReturnSum();
         new Test().testReduceSum();
         new Test().testReduceMoney();
+        new Test().testReduceMoneyDifferentCurrency();
+        new Test().testIdentityRate();
     }
     public void testMultiplication() {
         System.out.println("----------testMultiplication----------");
@@ -73,4 +75,22 @@ public class Test {
         Money result =  bank.reduce(Money.dollar(1), "USD");
         AssertHelper.assertEquals(result, Money.dollar(1));
     }
+
+    public void testReduceMoneyDifferentCurrency() {
+        System.out.println("----------testReduceMoneyDifferentCurrency----------");
+        Bank bank = new Bank();
+        bank.addRate("CHF", "USD", 2);
+        Money result = bank.reduce(Money.franc(2), "USD");
+        AssertHelper.assertEquals(result, Money.dollar(1));
+    }
+
+    public void testIdentityRate() {
+        System.out.println("----------testIdentityRate----------");
+        AssertHelper.assertEquals(1, new Bank().rate("USD", "USD"));
+    }
+
+//    public void testArrayEquals() {
+//        System.out.println("----------testArrayEquals----------");
+//        AssertHelper.assertEquals(new String[]{"abc"}, new String[]{"abc"});
+//    }
 }
