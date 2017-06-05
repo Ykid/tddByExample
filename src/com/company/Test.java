@@ -17,6 +17,9 @@ public class Test {
         new Test().testReduceMoneyDifferentCurrency();
         new Test().testIdentityRate();
         new Test().testMixedAddition();
+        new Test().testSumPlusMoney();
+        new Test().testSumTimes();
+//        new Test().testPlusSameCurrencyReturnsMoney();
     }
     public void testMultiplication() {
         System.out.println("----------testMultiplication----------");
@@ -99,4 +102,32 @@ public class Test {
         Money result = bank.reduce(fiveBucks.plus(tenFrancs), "USD");
         AssertHelper.assertEquals(result, Money.dollar(10));
     }
+
+    public void testSumPlusMoney() {
+        System.out.println("----------testSumPlusMoney----------");
+        Expression fiveBucks = Money.dollar(5);
+        Expression tenFrancs = Money.franc(10);
+        Bank bank = new Bank();
+        bank.addRate("CHF", "USD", 2);
+        Expression sum = new Sum(fiveBucks, tenFrancs).plus(fiveBucks);
+        Money result = bank.reduce(sum, "USD");
+        AssertHelper.assertEquals(result, Money.dollar(15));
+    }
+
+    public void testSumTimes() {
+        System.out.println("----------testSumTimes----------");
+        Expression fiveBucks = Money.dollar(5);
+        Expression tenFrancs = Money.franc(10);
+        Bank bank = new Bank();
+        bank.addRate("CHF", "USD", 2);
+        Expression sum = new Sum(fiveBucks, tenFrancs).times(2);
+        Money result = bank.reduce(sum, "USD");
+        AssertHelper.assertEquals(Money.dollar(20), result);
+    }
+//
+//    public void testPlusSameCurrencyReturnsMoney() {
+//        System.out.println("----------testPlusSameCurrencyReturnsMoney----------");
+//        Expression sum = Money.dollar(1).plus(Money.dollar(1));
+//        AssertHelper.assertEquals(true, sum instanceof Money);
+//    }
 }
